@@ -22,16 +22,18 @@ class MessagingBase:
         )
         self.channel = self.connection.channel()
 
-    def connect_and_basic_publish(self, message, queue=self.queue):
+    def connect_and_basic_publish(self, message):
+        queue = self.queue
         self.connect()
         self.channel.queue_declare(queue=queue)
-        self.channel.basic_publish(exchange='', routing_key=queue, body=data)
+        self.channel.basic_publish(exchange='', routing_key=queue, body=message)
         self.connection.close()
 
-    def connect_and_basic_get(self, queue=self.queue):
+    def connect_and_basic_get(self):
+        queue = self.queue
         self.connect()
         # basic_getを使用してメッセージを一度だけ取り出す
-        method_frame, header_frame, body = channel.basic_get(queue=queue)
+        method_frame, header_frame, body = self.channel.basic_get(queue=queue)
 
         if method_frame:
             # メッセージが存在する場合はコールバックを呼び出す

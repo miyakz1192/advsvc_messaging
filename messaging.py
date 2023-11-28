@@ -20,7 +20,7 @@ class MessagingBase:
         )
         self.channel = connection.channel()
 
-    def connect_and_basic_publish(self, queue=self.queue, message):
+    def connect_and_basic_publish(self, message, queue=self.queue):
         self.connect()
         self.channel.queue_declare(queue=queue)
         self.channel.basic_publish(exchange='', routing_key=queue, body=data)

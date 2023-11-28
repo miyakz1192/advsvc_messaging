@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import pika
+import sys
+import os
 
 
 class MessagingBase:
@@ -10,7 +12,7 @@ class MessagingBase:
         self.path = os.environ["LLM_SVC_QUEUE_SERVER_PATH"]
         self.user = os.environ["LLM_SVC_QUEUE_SERVER_USER"]
         self.passwd = os.environ["LLM_SVC_QUEUE_SERVER_PASSWD"]
-        self.credentials = pika.PlainCredentials(user, passwd)
+        self.credentials = pika.PlainCredentials(self.user, self.passwd)
         self.queue = None
 
     def connect(self):
@@ -18,7 +20,7 @@ class MessagingBase:
             pika.ConnectionParameters(self.ip, self.port,
                                       self.path, self.credentials)
         )
-        self.channel = connection.channel()
+        self.channel = self.connection.channel()
 
     def connect_and_basic_publish(self, message, queue=self.queue):
         self.connect()
@@ -44,5 +46,5 @@ class MessagingBase:
 
 class RecoderServiceMessaging(MessagingBase):
     def __init__(self):
-        super().__init()__
+        super().__init__()
         self.queue = "recorder"

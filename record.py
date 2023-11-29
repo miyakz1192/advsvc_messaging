@@ -1,6 +1,6 @@
 import datetime
 import io
-from record_base import *
+import pickle
 
 
 class RecordBase:
@@ -8,9 +8,9 @@ class RecordBase:
         self.timestamp = datetime.datetime.today()
 
     @classmethod
-    def to_byte(cls):
+    def to_byte(cls, obj):
         bytes_io = io.BytesIO()
-        pickle.dump(self, bytes_io)
+        pickle.dump(obj, bytes_io)
         byte_data = bytes_io.getvalue()
         return byte_data
 

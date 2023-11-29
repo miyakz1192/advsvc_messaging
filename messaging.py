@@ -3,6 +3,7 @@
 import pika
 import sys
 import os
+from record import *
 
 
 class MessagingBase:
@@ -22,6 +23,9 @@ class MessagingBase:
         )
         self.channel = self.connection.channel()
 
+    def connect_and_basic_publish_record(self, record):
+        self.connect_and_basic_publish(RecordBase.to_byte(record))
+
     def connect_and_basic_publish(self, message):
         queue = self.queue
         self.connect()
@@ -37,9 +41,10 @@ class MessagingBase:
 
         if method_frame:
             # メッセージが存在する場合はコールバックを呼び出す
-            self.basic_get_callback(channel, method_frame, None, body)
+            return self.basic_get_callback(channel, method_frame, None, body)
         else:
             print("No message in the queue")
+            return None
 
     def basic_get_callback(self, channel, method, properties, body):
         # conclete class must overwride this method

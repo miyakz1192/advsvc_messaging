@@ -6,6 +6,7 @@ import pickle
 class RecordBase:
     def __init__(self):
         self.timestamp = datetime.datetime.today()
+        self.id = None
 
     @classmethod
     def to_byte(cls, obj):
@@ -25,3 +26,11 @@ class RawAudioRecord(RecordBase):
     def __init__(self, raw_audio_byte):
         super().__init__()
         self.raw_audio_byte = raw_audio_byte
+
+
+class Audio2TextRecord(RecordBase):
+    def __init__(self, ident, raw_audio_byte, audio2text):
+        super().__init__()
+        self.id = ident
+        self.raw_audio_byte = raw_audio_byte
+        self.audio2text = audio2text

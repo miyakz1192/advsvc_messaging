@@ -61,3 +61,15 @@ class RecoderServiceMessaging(MessagingBase):
     def __init__(self):
         super().__init__()
         self.queue = "recorder"
+
+
+class Audio2TextServiceReqMessaging(MessagingBase):
+    def __init__(self):
+        super().__init__()
+        self.queue = "audio2text_req"
+
+
+class Audio2TextServiceResMessaging(MessagingBase):
+    def __init__(self):
+        super().__init__()
+        self.queue = "audio2text_res"

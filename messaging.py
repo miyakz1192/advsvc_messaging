@@ -30,7 +30,8 @@ class MessagingBase:
         queue = self.queue
         self.connect()
         self.channel.queue_declare(queue=queue)
-        self.channel.basic_publish(exchange='', routing_key=queue, body=message)
+        self.channel.basic_publish(exchange='',
+                                   routing_key=queue, body=message)
         self.connection.close()
 
     def connect_and_basic_get(self):
@@ -41,14 +42,19 @@ class MessagingBase:
 
         if method_frame:
             # メッセージが存在する場合はコールバックを呼び出す
-            return self.basic_get_callback(channel, method_frame, None, body)
+            return self.basic_get_callback(self.channel, method_frame,
+                                           None, body)
         else:
             print("No message in the queue")
             return None
 
+    def connect_and_basic_get_record(self):
+        byte_data = self.connect_and_basic_get()
+        return RecordBase.from_byte(byte_data)
+
     def basic_get_callback(self, channel, method, properties, body):
-        # conclete class must overwride this method
-        pass
+        channel.basic_ack(delivery_tag=method.delivery_tag)
+        return body
 
 
 class RecoderServiceMessaging(MessagingBase):

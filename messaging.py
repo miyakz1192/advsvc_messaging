@@ -37,6 +37,7 @@ class MessagingBase:
     def connect_and_basic_get(self):
         queue = self.queue
         self.connect()
+        self.channel.queue_declare(queue=queue)
         # basic_getを使用してメッセージを一度だけ取り出す
         method_frame, header_frame, body = self.channel.basic_get(queue=queue)
 
@@ -50,6 +51,8 @@ class MessagingBase:
 
     def connect_and_basic_get_record(self):
         byte_data = self.connect_and_basic_get()
+        if byte_data is None:
+            return None
         return RecordBase.from_byte(byte_data)
 
     def basic_get_callback(self, channel, method, properties, body):

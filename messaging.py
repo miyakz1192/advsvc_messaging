@@ -76,3 +76,15 @@ class Audio2TextServiceResMessaging(MessagingBase):
     def __init__(self):
         super().__init__()
         self.queue = "audio2text_res"
+
+
+class Text2AdviceServiceReqMessaging(MessagingBase):
+    def __init__(self):
+        super().__init__()
+        self.queue = "text2advice_req"
+
+
+class Text2AdviceServiceResMessaging(MessagingBase):
+    def __init__(self):
+        super().__init__()
+        self.queue = "text2advice_res"

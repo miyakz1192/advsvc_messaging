@@ -34,3 +34,11 @@ class Audio2TextRecord(RecordBase):
         self.id = ident
         self.raw_audio_byte = raw_audio_byte
         self.audio2text = audio2text
+
+
+class Text2AdviceRecord(RecordBase):
+    def __init__(self, ident, in_text, advice_text):
+        super().__init__()
+        self.id = ident
+        self.in_text = in_text
+        self.advice_text = advice_text

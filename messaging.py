@@ -88,3 +88,15 @@ class Text2AdviceServiceResMessaging(MessagingBase):
     def __init__(self):
         super().__init__()
         self.queue = "text2advice_res"
+
+
+class LLMInstanceReqMessaging(MessagingBase):
+    def __init__(self):
+        super().__init__()
+        self.queue = "llminstance_req"
+
+
+class LLMInstanceResMessaging(MessagingBase):
+    def __init__(self):
+        super().__init__()
+        self.queue = "llminstance_res"

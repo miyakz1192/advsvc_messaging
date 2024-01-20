@@ -42,3 +42,12 @@ class Text2AdviceRecord(RecordBase):
         self.id = ident
         self.in_text = in_text
         self.advice_text = advice_text
+
+
+class LLMInstanceRecord(RecordBase):
+    def __init__(self, ident, instruction, input_):
+        super().__init__()
+        self.id = ident
+        self.instruction = instruction
+        self.input_ = input_
+        self.result = None

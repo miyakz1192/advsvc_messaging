@@ -5,6 +5,8 @@ import time
 import sys
 import traceback
 import uuid
+from record import *
+from messaging import *
 
 
 # LLMInstanceServiceに要求を行うサービスの基底クラス
@@ -123,7 +125,7 @@ class LLMMediatorBase:
 
     def unit_work(self):
         print("Getting new req from queue")
-        rec = self.get_from_req_queue():
+        rec = self.get_from_req_queue()
         if rec is None:
             self.retry()
             return

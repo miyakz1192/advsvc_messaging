@@ -100,3 +100,15 @@ class LLMInstanceResMessaging(MessagingBase):
     def __init__(self):
         super().__init__()
         self.queue = "llminstance_res"
+
+
+class Advice2SummaryServiceReqMessaging(MessagingBase):
+    def __init__(self):
+        super().__init__()
+        self.queue = "advice2summary_req"
+
+
+class Advice2SummaryServiceResMessaging(MessagingBase):
+    def __init__(self):
+        super().__init__()
+        self.queue = "advice2summary_res"

@@ -1,6 +1,7 @@
 import datetime
 import io
 import pickle
+import uuid
 
 
 class RecordBase:
@@ -45,10 +46,16 @@ class Text2AdviceRecord(RecordBase):
 
 
 class Advice2SummaryRecord(RecordBase):
-    def __init__(self, ident, advice_text, summary_text):
+    # advice_texts is array of string(advice text array)
+    # summary_text is basically a single string text
+    def __init__(self, ident, advice_texts, summary_text):
         super().__init__()
+        # TODO: refactor me! this must be written in base class __init__
+        if ident is None:
+            ident = str(uuid.uuid4())
+
         self.id = ident
-        self.advice_text = advice_text
+        self.advice_texts = advice_texts
         self.summary_text = summary_text
 
 

@@ -38,11 +38,12 @@ class Audio2TextRecord(RecordBase):
 
 
 class Text2AdviceRecord(RecordBase):
-    def __init__(self, ident, in_text, advice_text):
+    def __init__(self, ident, in_text, advice_text, advice_text_full):
         super().__init__()
         self.id = ident
         self.in_text = in_text
         self.advice_text = advice_text
+        self.advice_text_full = advice_text_full
 
 
 class Advice2SummaryRecord(RecordBase):

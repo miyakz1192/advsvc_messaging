@@ -144,7 +144,7 @@ class LLMMediatorBase:
         print("INFO: unit work end")
 
     def ask_to_llm(self, input_text):
-        self._ask_to_llm_core(input_text)
+        return self._ask_to_llm_core(input_text)
 
     def _ask_to_llm_core(self, input_text):
         timed_out_counter = 0

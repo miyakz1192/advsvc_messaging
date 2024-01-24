@@ -87,6 +87,7 @@ class LLMMediatorBase:
         self.set_default_instruction()
 
     def sleep_wait(self):
+        #TODO: FIXME: ランダム性が必要
         time.sleep(self.wait_sec)
 
     def is_timed_out_to_llminstance(self, timed_out_counter):
@@ -170,6 +171,7 @@ class LLMMediatorBase:
                     print(f"INFO: got a message {recv.result}")
                     return recv.result
                 else:
+                    #TODO: FIXME: いまだとゴミがあるケースだとタイムアウトしない。TTLの仕組み必要
                     print(f"INFO: got a message but not eq ident(got message was not to mine. this must be received by other llm_mediator instance) {recv.id} != {rec.id}")
                     LLMInstanceResMessaging().connect_and_basic_publish_record(recv)
 
